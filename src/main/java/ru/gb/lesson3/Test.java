@@ -1,0 +1,81 @@
+package ru.gb.lesson3;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.sound.midi.Soundbank;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+    public class Test {
+
+        public static void main(String[] args) throws InterruptedException {
+
+/*                System.setProperty(
+                "webdriver.chrome.driver", "src/main/resources/chromedriver"
+        );*/
+
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--incognito");
+            //options.addArguments("--headless");
+            options.addArguments("start-maximized");
+
+
+            WebDriver driver = new ChromeDriver(options);
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+            driver.get("https://google.com");
+
+            WebElement webElement1 = driver.findElement(By.name("q"));
+            WebElement webElement2 = driver.findElement(By.cssSelector("input.gLFyf.gsfi"));
+            WebElement webElement3 = driver.findElement(By.xpath(".//input[@name='q']"));
+
+            try {
+                WebElement webElementError = driver.findElement(By.name("error"));
+            } catch (NoSuchElementException e){
+                System.out.println(e.getSupportUrl());
+            }
+
+            List<WebElement> webElements = driver.findElements(By.name("error"));
+            if(webElements.size()>1){
+                //still working on
+            }
+
+            webElement1.click();
+            webElement2.sendKeys("Поиск");
+
+
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlContains("google"));
+
+            driver.navigate().to("https://google.com");
+
+            try {
+                webElement3.sendKeys("Привет");
+            } catch (StaleElementReferenceException e){
+                System.out.println(e.getSupportUrl());
+            }
+
+            try {
+                driver.findElement(By.xpath(".//textarea")).click();
+            } catch (ElementNotInteractableException e){
+                System.out.println(e.getSupportUrl());
+            }
+
+            Thread.sleep(10000);
+            //Завершаем работу с ресурсом
+            driver.quit();
+        }
+    }

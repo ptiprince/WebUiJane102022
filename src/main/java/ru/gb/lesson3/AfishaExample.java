@@ -15,6 +15,7 @@ public class AfishaExample {
         WebDriverManager.chromedriver().setup();
 
         WebDriver webDriver = new ChromeDriver();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         webDriver.get("https://www.afisha.ru/");
 
        WebElement inputSearch = webDriver.findElement(By.xpath("//input[@placeholder='Событие, актер, место']"));
