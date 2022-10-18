@@ -32,7 +32,6 @@ import java.util.List;
             driver = new ChromeDriver();
             //runJsScriptExample() - another plugin to avoid advertisement
             driver.manage().window().maximize();
-            //WebDriverWait webDriverWait = new WebDriverWait(driver, 5);
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
             loginToCrm();
