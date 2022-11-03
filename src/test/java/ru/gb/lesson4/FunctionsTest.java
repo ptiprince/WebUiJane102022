@@ -72,7 +72,7 @@ public class FunctionsTest {
     private static List<Arguments> catAndAgeDataProvider(){
         return Arrays.asList(
                 Arguments.of(new Cat("Test1", 10), 10),
-                Arguments.of(new Cat("Test2", 11), 12)
+                Arguments.of(new Cat("Test2", 11), 11)
         );
     }
 
