@@ -29,12 +29,13 @@ public class HwLesson5Test {
         driver.get("https://www.riproad.com");
     }
 
+    private static final String privacyPolicyButtonXpathLocator = "//div/h2[.='Privacy Policy']";
+
     @Test
     void goToPrivacyTest() {
         driver.findElement(By.xpath("//a[.='Privacy']")).click();
-
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/h2[.='Privacy Policy']")));
-        Assertions.assertTrue(driver.findElement(By.xpath("//div/h2[.='Privacy Policy']")).isDisplayed());
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(privacyPolicyButtonXpathLocator)));
+        Assertions.assertTrue(driver.findElement(By.xpath(privacyPolicyButtonXpathLocator)).isDisplayed());
     }
 
     @Test
@@ -47,7 +48,7 @@ public class HwLesson5Test {
 
     @Test
     void contactUsTest() throws InterruptedException {
-        driver.findElement(By.xpath("//a[@href='contact-us.html']")).click();
+        driver.findElement(By.xpath("//div[@class='standard-header-links-wrapper']//a[.='CONTACT']")).click();
 
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@data-name='firstName']")));
         driver.findElement(By.xpath("//input[@data-name='firstName']")).sendKeys("Brad");
